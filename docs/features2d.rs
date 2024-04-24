@@ -2743,7 +2743,7 @@ pub mod features2d {
 		/// ## C++ default parameters
 		/// * masks: noArray()
 		#[inline]
-		fn match_(&mut self, query_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::DMatch>, masks: &impl ToInputArray) -> Result<()> {
+		fn match_1(&mut self, query_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::DMatch>, masks: &impl ToInputArray) -> Result<()> {
 			input_array_arg!(query_descriptors);
 			input_array_arg!(masks);
 			return_send!(via ocvrs_return);
@@ -2765,10 +2765,31 @@ pub mod features2d {
 		/// This alternative version of [DescriptorMatcherTrait::match_] function uses the following default values for its arguments:
 		/// * masks: noArray()
 		#[inline]
-		fn match__def(&mut self, query_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::DMatch>) -> Result<()> {
+		fn match_1_def(&mut self, query_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::DMatch>) -> Result<()> {
 			input_array_arg!(query_descriptors);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_DescriptorMatcher_match_const__InputArrayR_vectorLDMatchGR(self.as_raw_mut_DescriptorMatcher(), query_descriptors.as_raw__InputArray(), matches.as_raw_mut_VectorOfDMatch(), ocvrs_return.as_mut_ptr()) };
+			return_receive!(unsafe ocvrs_return => ret);
+			let ret = ret.into_result()?;
+			Ok(ret)
+		}
+
+		fn match_(&mut self, query_descriptors: &impl ToInputArray, train_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::DMatch>, mask: &impl ToInputArray) -> Result<()> {
+			input_array_arg!(query_descriptors);
+			input_array_arg!(train_descriptors);
+			input_array_arg!(mask);
+			return_send!(via ocvrs_return);
+			unsafe { sys::cv_DescriptorMatcher_match_const__InputArrayR_const__InputArrayR_vectorLDMatchGR_const__InputArrayR(self.as_raw_mut_CUDA_DescriptorMatcher(), query_descriptors.as_raw__InputArray(), train_descriptors.as_raw__InputArray(), matches.as_raw_mut_VectorOfDMatch(), mask.as_raw__InputArray(), ocvrs_return.as_mut_ptr()) };
+			return_receive!(unsafe ocvrs_return => ret);
+			let ret = ret.into_result()?;
+			Ok(ret)
+		}
+
+		fn match__def(&mut self, query_descriptors: &impl ToInputArray, train_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::DMatch>) -> Result<()> {
+			input_array_arg!(query_descriptors);
+			input_array_arg!(train_descriptors);
+			return_send!(via ocvrs_return);
+			unsafe { sys::cv_DescriptorMatcher_match_const__InputArrayR_const__InputArrayR_vectorLDMatchGR(self.as_raw_mut_CUDA_DescriptorMatcher(), query_descriptors.as_raw__InputArray(), train_descriptors.as_raw__InputArray(), matches.as_raw_mut_VectorOfDMatch(), ocvrs_return.as_mut_ptr()) };
 			return_receive!(unsafe ocvrs_return => ret);
 			let ret = ret.into_result()?;
 			Ok(ret)
@@ -2809,7 +2830,7 @@ pub mod features2d {
 		/// * masks: noArray()
 		/// * compact_result: false
 		#[inline]
-		fn knn_match(&mut self, query_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::Vector<core::DMatch>>, k: i32, masks: &impl ToInputArray, compact_result: bool) -> Result<()> {
+		fn knn_match_1(&mut self, query_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::Vector<core::DMatch>>, k: i32, masks: &impl ToInputArray, compact_result: bool) -> Result<()> {
 			input_array_arg!(query_descriptors);
 			input_array_arg!(masks);
 			return_send!(via ocvrs_return);
@@ -2836,10 +2857,33 @@ pub mod features2d {
 		/// * masks: noArray()
 		/// * compact_result: false
 		#[inline]
-		fn knn_match_def(&mut self, query_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::Vector<core::DMatch>>, k: i32) -> Result<()> {
+		fn knn_match_1_def(&mut self, query_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::Vector<core::DMatch>>, k: i32) -> Result<()> {
 			input_array_arg!(query_descriptors);
 			return_send!(via ocvrs_return);
 			unsafe { sys::cv_DescriptorMatcher_knnMatch_const__InputArrayR_vectorLvectorLDMatchGGR_int(self.as_raw_mut_DescriptorMatcher(), query_descriptors.as_raw__InputArray(), matches.as_raw_mut_VectorOfVectorOfDMatch(), k, ocvrs_return.as_mut_ptr()) };
+			return_receive!(unsafe ocvrs_return => ret);
+			let ret = ret.into_result()?;
+			Ok(ret)
+		}
+
+		#[inline]
+		fn knn_match(&mut self, query_descriptors: &impl ToInputArray, train_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::Vector<core::DMatch>>, k: i32, mask: &impl ToInputArray, compact_result: bool) -> Result<()> {
+			input_array_arg!(query_descriptors);
+			input_array_arg!(train_descriptors);
+			input_array_arg!(mask);
+			return_send!(via ocvrs_return);
+			unsafe { sys::cv_DescriptorMatcher_knnMatch_const__InputArrayR_const__InputArrayR_vectorLvectorLDMatchGGR_int_const__InputArrayR_bool(self.as_raw_mut_CUDA_DescriptorMatcher(), query_descriptors.as_raw__InputArray(), train_descriptors.as_raw__InputArray(), matches.as_raw_mut_VectorOfVectorOfDMatch(), k, mask.as_raw__InputArray(), compact_result, ocvrs_return.as_mut_ptr()) };
+			return_receive!(unsafe ocvrs_return => ret);
+			let ret = ret.into_result()?;
+			Ok(ret)
+		}
+
+		#[inline]
+		fn knn_match_def(&mut self, query_descriptors: &impl ToInputArray, train_descriptors: &impl ToInputArray, matches: &mut core::Vector<core::Vector<core::DMatch>>, k: i32) -> Result<()> {
+			input_array_arg!(query_descriptors);
+			input_array_arg!(train_descriptors);
+			return_send!(via ocvrs_return);
+			unsafe { sys::cv_DescriptorMatcher_knnMatch_const__InputArrayR_const__InputArrayR_vectorLvectorLDMatchGGR_int(self.as_raw_mut_CUDA_DescriptorMatcher(), query_descriptors.as_raw__InputArray(), train_descriptors.as_raw__InputArray(), matches.as_raw_mut_VectorOfVectorOfDMatch(), k, ocvrs_return.as_mut_ptr()) };
 			return_receive!(unsafe ocvrs_return => ret);
 			let ret = ret.into_result()?;
 			Ok(ret)
